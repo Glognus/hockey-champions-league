@@ -6,6 +6,15 @@
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:azureFunctions.pickProcess}"
+        },
+        {
+            "name": "SWA: Run app",
+            "request": "launch",
+            "type": "pwa-chrome",
+            "url": "http://localhost:4280",
+            "preLaunchTask": "swa: start app",
+            "webRoot": "${workspaceFolder}/app",
+            "timeout": 30000
         }
     ]
 }

@@ -1,14 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  const [data, setData] = useState("");
+
+  useEffect(() => {
+    (async function () {
+      const { text } = await (await fetch(`/api/Team/23`)).json();
+      setData(text);
+    })();
+  });
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
+          {data ? `${data}` : "Loading..."}
         </p>
         <a
           className="App-link"

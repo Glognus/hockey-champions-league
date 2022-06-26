@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { useState, useEffect } from "react";
+import { Team } from "./models";
 
 function App() {
-  const [data, setData] = useState("");
-
+  const [data, setData] = useState<Team[]>();
   useEffect(() => {
-    (async function () {
-      const { text } = await (await fetch(`/api/Team/23`)).json();
-      setData(text);
+    (async () => {
+      const test: Team[] = await (await fetch("/api/teams")).json();
+      setData(test);
     })();
-  });
+
+    return () => {};
+  }, []);
 
   return (
     <div className="App">
@@ -18,8 +20,8 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
-          {data ? `${data}` : "Loading..."}
         </p>
+        {data && data.map((team: Team) => <div key={team.id}>{team.year}</div>)}
         <a
           className="App-link"
           href="https://reactjs.org"

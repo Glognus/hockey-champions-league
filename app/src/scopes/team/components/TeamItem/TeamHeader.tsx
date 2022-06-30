@@ -17,14 +17,25 @@ const CoachBox = () => {
   );
 };
 
-export const TeamHeader = () => {
-  const theme = createTheme();
-  const { teamCaptain } = useGlobalStore(
+const CaptainBox = () => {
+  const { selectedTeamCaptain } = useGlobalStore(
     (state) => ({
-      teamCaptain: state.selectedTeam?.players?.find((p) => p.isCapitain),
+      selectedTeamCaptain: state.selectedTeam?.players.find(
+        (p) => p.isCapitain
+      ),
     }),
     shallow
   );
+  return (
+    <div>
+      <Typography variant="body1">Captain</Typography>
+      <Typography variant="h5">{selectedTeamCaptain?.name}</Typography>
+    </div>
+  );
+};
+
+export const TeamHeader = () => {
+  const theme = createTheme();
   return (
     <>
       <Avatar sx={{ width: 80, height: 80 }} />
@@ -37,10 +48,7 @@ export const TeamHeader = () => {
         }}
       >
         <CoachBox />
-        <div>
-          <Typography variant="body1">Captain</Typography>
-          <Typography variant="h5">{teamCaptain?.name}</Typography>
-        </div>
+        <CaptainBox />
       </Box>
     </>
   );

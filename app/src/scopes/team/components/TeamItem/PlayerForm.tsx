@@ -23,11 +23,12 @@ import { useGlobalStore } from "../../../../store/globalStore";
 import { positionTypeToString } from "../../../../utils/PlayerHelper";
 
 interface PlayerFormProps {
+  open: boolean;
   player?: Player;
   onClose: () => void;
 }
 
-export const PlayerForm = ({ player, onClose }: PlayerFormProps) => {
+export const PlayerForm = ({ open, player, onClose }: PlayerFormProps) => {
   const theme = createTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const { selectedTeam, addPlayer } = useGlobalStore((state) => {
@@ -77,7 +78,7 @@ export const PlayerForm = ({ player, onClose }: PlayerFormProps) => {
     <div>
       <Dialog
         fullScreen={fullScreen}
-        open
+        open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >

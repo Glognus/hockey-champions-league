@@ -30,10 +30,10 @@ export const NotFoundPage = () => {
     >
       <Box>
         <Typography variant="h2" textAlign={"center"}>
-          Oups
+          Oops
         </Typography>
         <Typography variant="h3" textAlign={"center"}>
-          This page does not seem exist. 😔
+          This page does not seem to exist. 😔
         </Typography>
       </Box>
       <Box

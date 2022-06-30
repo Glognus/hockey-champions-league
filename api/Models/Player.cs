@@ -17,6 +17,6 @@ namespace HockeyApi.Models
         public bool? IsCapitain { get; set; }
 
         [IgnoreDataMember]
-        public ICollection<Team> Teams { get; set; }
+        public ICollection<Team> Teams { get; set; } // usefull for many to many relation between players and teams
     }
 }

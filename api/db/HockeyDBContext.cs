@@ -17,7 +17,12 @@ namespace HockeyApi.Db
 
         public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
-
+        /// <summary>
+        /// Using EntityFrameworkCore as ORM to store data in SQL Server. 
+        /// As defined in the statement, 
+        /// We have Many to Many relationship between teams and players with a join table player_team.
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Player>(entity =>
@@ -49,28 +54,28 @@ namespace HockeyApi.Db
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Coach)
-                    .IsRequired()
-                    .HasColumnName("coach");
+                                    .IsRequired()
+                                    .HasColumnName("coach");
 
                 entity.Property(e => e.Year).HasColumnName("year");
 
                 entity.HasMany(p => p.Players)
-                    .WithMany(p => p.Teams)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "TeamPlayer",
-                        j => j
-                            .HasOne<Player>()
-                            .WithMany()
-                            .HasForeignKey("player_id")
-                            .HasConstraintName("FK_TeamPlayer_Players_PlayerId")
-                            .OnDelete(DeleteBehavior.Cascade),
-                        j => j
-                            .HasOne<Team>()
-                            .WithMany()
-                            .HasForeignKey("team_id")
-                            .HasConstraintName("FK_TeamPlayer_Teams_TeamId")
-                            .OnDelete(DeleteBehavior.ClientCascade))
-                        .ToTable("player_team");
+                                    .WithMany(p => p.Teams)
+                                    .UsingEntity<Dictionary<string, object>>(
+                                        "TeamPlayer",
+                                        j => j
+                                            .HasOne<Player>()
+                                            .WithMany()
+                                            .HasForeignKey("player_id")
+                                            .HasConstraintName("FK_TeamPlayer_Players_PlayerId")
+                                            .OnDelete(DeleteBehavior.Cascade),
+                                        j => j
+                                            .HasOne<Team>()
+                                            .WithMany()
+                                            .HasForeignKey("team_id")
+                                            .HasConstraintName("FK_TeamPlayer_Teams_TeamId")
+                                            .OnDelete(DeleteBehavior.ClientCascade))
+                                        .ToTable("player_team");
 
             });
 

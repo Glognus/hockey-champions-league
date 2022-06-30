@@ -30,11 +30,11 @@ namespace HockeyApi.Function
             operationId: "GetTeams",
             tags: new[] { "Team" },
             Summary = "Get every teams existing",
-            Description = "Get.")]
+            Description = "Get every teams existing")]
         [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(IEnumerable<Team>))]
         [OpenApiResponseWithoutBody(HttpStatusCode.NotFound, Description = "No teams found")]
         public async Task<IActionResult> GetTeams(
-[HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "teams")] HttpRequest req, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "teams")] HttpRequest req, ILogger log)
         {
             var result = await _hockeyManagementService.GetTeamsAsync();
             if (result == null)
@@ -81,7 +81,7 @@ namespace HockeyApi.Function
         [OpenApiResponseWithBody(HttpStatusCode.Created, "application/json", typeof(Player))]
         [OpenApiResponseWithBody(HttpStatusCode.InternalServerError, "application/text", typeof(string), Description = "Player cannot be created")]
         public async Task<IActionResult> CreateTeam(
-[HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "teams/{year}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "teams/{year}")] HttpRequest req,
             string year, ILogger log)
         {
             try
@@ -97,7 +97,6 @@ namespace HockeyApi.Function
                 var result = await _hockeyManagementService.AddPlayerToTeamByYearAsync(
                     yearPayload.Value,
                     newPlayer);
-
 
                 if (result == null)
                     return new InternalServerErrorResult();
@@ -123,7 +122,7 @@ namespace HockeyApi.Function
         [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(Player))]
         [OpenApiResponseWithBody(HttpStatusCode.InternalServerError, "application/text", typeof(string), Description = "Team cannot be updated")]
         public async Task<IActionResult> UpdateTeamCaptainByYear(
-[HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "teams/{year}/{playerId}/captain")] HttpRequest req, string year, string playerId, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "teams/{year}/{playerId}/captain")] HttpRequest req, string year, string playerId, ILogger log)
         {
             var yearPayload = int.TryParse(year, out var yearInt) ? yearInt : (int?)null;
             if (yearPayload == null)
@@ -143,89 +142,29 @@ namespace HockeyApi.Function
             return new OkObjectResult(result);
         }
 
-        //         [FunctionName("CreateTeam")]
-        //         [OpenApiOperation(
-        //             operationId: "CreateTeam",
-        //             tags: new[] { "Team" },
-        //             Summary = "Create new team",
-        //             Description = "Create new team with the given data.")]
-        //         [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(Team), Description = "Team payload", Required = true)]
-        //         [OpenApiResponseWithBody(HttpStatusCode.Created, "application/json", typeof(Team))]
-        //         [OpenApiResponseWithBody(HttpStatusCode.InternalServerError, "application/text", typeof(string), Description = "Team cannot be created")]
-        //         public async Task<IActionResult> CreateTeam(
-        // [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "teams")] HttpRequest req, ILogger log)
-        //         {
-        //             try
-        //             {
+        [FunctionName("SeedDatas")]
+        [OpenApiOperation(
+            operationId: "GetTeams",
+            tags: new[] { "Technical" },
+            Summary = "Seed database",
+            Description = "Seed database with fake datas.")]
+        [OpenApiResponseWithBody(HttpStatusCode.Created, "application/json", typeof(string), Description = "Database seeded")]
+        [OpenApiResponseWithoutBody(HttpStatusCode.NotFound, Description = "Database cannot be seeded")]
+        public async Task<IActionResult> SeedFakeDatas(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "seed")] HttpRequest req, ILogger log)
+        {
+            try
+            {
+                await _hockeyManagementService.SeedFakeDatasAsync();
+                return new OkObjectResult("Database seeded");
+            }
+            catch (System.Exception exception)
+            {
+                log.LogError(exception, "SeedDatas");
+                return new NotFoundObjectResult("Database cannot be seeded");
+            }
+        }
 
-        //                 var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
-        //                 var newTeam = JsonConvert.DeserializeObject<Team>(requestBody);
-
-        //                 var result = await _hockeyManagementService.CreateTeamAsync(newTeam);
-
-        //                 if (result == null)
-        //                     return new InternalServerErrorResult();
-
-        //                 return new OkObjectResult(result);
-        //             }
-        //             catch (System.Exception exception)
-        //             {
-        //                 log.LogError(exception, "CreateTeam");
-        //                 return new InternalServerErrorResult();
-        //             }
-        //         }
-
-        //         [FunctionName("UpdateTeam")]
-        //         [OpenApiOperation(
-        // operationId: "UpdateTeam",
-        // tags: new[] { "Team" },
-        // Summary = "Update team",
-        // Description = "Update team with the given data.")]
-        //         [OpenApiParameter("year", In = ParameterLocation.Path, Required = true, Description = "Year", Type = typeof(string))]
-        //         [OpenApiResponseWithBody(HttpStatusCode.BadRequest, "application/text", typeof(string), Description = "Invalid year")]
-        //         [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(Team), Description = "Team Data", Required = true)]
-        //         [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(Team))]
-        //         [OpenApiResponseWithBody(HttpStatusCode.InternalServerError, "application/text", typeof(string), Description = "Team cannot be updated")]
-        //         public async Task<IActionResult> UpdateTeam(
-        // [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "teams/{year}")] HttpRequest req, string year, ILogger log)
-        //         {
-        //             var yearPayload = int.TryParse(year, out var yearInt) ? yearInt : (int?)null;
-        //             if (yearPayload == null)
-        //                 return new BadRequestObjectResult("Invalid year");
-
-        //             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-
-        //             var updatedTeam = JsonConvert.DeserializeObject<Team>(requestBody);
-
-        //             var result = await _hockeyManagementService.UpdateTeamAsync(yearPayload.Value, updatedTeam);
-
-        //             if (result == null)
-        //                 return new InternalServerErrorResult();
-
-        //             return new OkObjectResult(result);
-        //         }
-
-        //         [FunctionName("DeleteTeam")]
-        //         [OpenApiOperation(
-        // operationId: "DeleteTeam",
-        // tags: new[] { "Team" },
-        // Summary = "Delete team",
-        // Description = "Delete team with the given year.")]
-        //         [OpenApiParameter("year", In = ParameterLocation.Path, Required = true, Description = "Year", Type = typeof(string))]
-        //         [OpenApiResponseWithBody(HttpStatusCode.BadRequest, "application/text", typeof(string), Description = "Invalid year")]
-        //         [OpenApiResponseWithBody(HttpStatusCode.Created, "application/json", typeof(Team))]
-        //         [OpenApiResponseWithBody(HttpStatusCode.InternalServerError, "application/text", typeof(string), Description = "Team cannot be deleted")]
-        //         public async Task<IActionResult> DeleteTeam(
-        // [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "teams/{year}")] HttpRequest req, string year, ILogger log)
-        //         {
-        //             var yearPayload = int.TryParse(year, out var yearInt) ? yearInt : (int?)null;
-        //             if (yearPayload == null)
-        //                 return new BadRequestObjectResult("Invalid year");
-
-        //             await _hockeyManagementService.DeleteTeamAsync(yearPayload.Value);
-
-        //             return new OkResult();
-        //         }
     }
 }

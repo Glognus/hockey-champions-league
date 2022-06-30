@@ -1,11 +1,12 @@
 import { PositionType } from "./Common";
-import { Team } from "./Team";
 
 export interface Player {
   id: number;
   number?: number;
   name: string;
-  lastName: string;
+  lastname: string;
   position: PositionType;
-  teams: Team[];
+  isCapitain: boolean;
 }
+
+export type PlayerPayload = Omit<Player, "id" | "teams">;

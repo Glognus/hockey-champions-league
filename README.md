@@ -4,16 +4,22 @@ Bienvenue sur Hockey Champions League !
 
 Vous pouvez gérer l'équipe de Hockey des Canadiens de Montréal.
 
+[![Web App](https://github.com/Glognus/hockey-champions-league/actions/workflows/azure-static-web-apps-brave-cliff-048664610.yml/badge.svg)](https://github.com/Glognus/hockey-champions-league/actions/workflows/azure-static-web-apps-brave-cliff-048664610.yml)
+
+[![API REST](https://github.com/Glognus/hockey-champions-league/actions/workflows/master_hockey-dev-api.yml/badge.svg)](https://github.com/Glognus/hockey-champions-league/actions/workflows/master_hockey-dev-api.yml)
+
 [Application Web] - https://brave-cliff-048664610.1.azurestaticapps.net/
 
-[Api] - https://hockey-dev-api.azurewebsites.net/api/swagger/ui#/Team/GetTeams
 
-[Swagger] - https://hockey-dev-api.azurewebsites.net/api/swagger/ui#/Team/GetTeams
+[Api] - https://hockey-dev-api.azurewebsites.net/
+
+[Swagger] - https://hockey-dev-api.azurewebsites.net/api/swagger/ui
 
 ### Fonctionnalités :
 - Lister la composition de l’équipe en fonction de l'année dans la base de données.
 - Ajouter un nouveau joueur de l'équipe d'une année définie dans la base de données.
 - Mettre à jour le capitaine de l'équipe d'une année définie en sélectionnant un joueur de la table.
+
 **(Cliquez sur le joueur de la table pour l'assigner comme nouveau capitaine !)**
 
 ### Fonctionnalités complémentaire :
@@ -25,7 +31,7 @@ Vous pouvez gérer l'équipe de Hockey des Canadiens de Montréal.
 
 ### Développement local
 
-    Configurer une connection string pour se connecter a une base PostgreSQL dans (./api/_local.settings.json => local.settings.json)
+    Configurez une connection string pour se connecter à une base PostgreSQL dans (./api/_local.settings.json => local.settings.json)
 
 Pour démarrer l'application web + api + swagger :
 ```sh
@@ -69,7 +75,7 @@ API disponible ici : [https://hockey-dev-api.azurewebsites.net/]
 
 Playground Swagger: [https://hockey-dev-api.azurewebsites.net/api/swagger/ui/]
 
-La partie api => base de données est mappé pour supporter plusieurs équipes pour plusieurs joueurs.
+La partie api => base de données est mappée pour supporter plusieurs équipes pour plusieurs joueurs.
 (Many to Many)
 
 La partie front => api est mappé pour supporter pour l'instant une seule équipe (équipe de Hockey des Canadiens de Montréal) pour plusieurs joueurs en fonctions de l'année. 
@@ -77,15 +83,15 @@ La partie front => api est mappé pour supporter pour l'instant une seule équip
 
 ## Stack techniques
 ### Cloud
-- Azure Static web apps
-- Azure PostgreSQL Database
-- Azure Functions
+    - Azure Static web apps
+    - Azure PostgreSQL Database
+    - Azure Functions
 ### Backend
     - .NET Core Full Serverless
     - API Rest valide Swagger 3.0
     - PostgreSQL
     - EF Core 6.0 (ORM)
-La décision de choisir un ORM était pour être plus rapide sur l'implémentation du reste des fonctionnalités, ce n’est pas une solution très adaptée sur des plus gros projets car il peut y avoir un réel impacte sur les performances lorsqu’il y a encore plusieurs d’entités en jeux.
+La décision de choisir un ORM était pour être plus rapide sur l'implémentation du reste des fonctionnalités, ce n’est pas une solution adaptée sur des plus gros projets car il peut y avoir un réel impacte sur les performances lorsqu’il y a plusieurs entités en jeu.
 ### Frontend
     - ReactJS + Typescript (CRA) (Frontend)
     - Zustand (State Management)

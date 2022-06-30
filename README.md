@@ -93,6 +93,10 @@ La décision de choisir un ORM était pour être plus rapide sur l'implémentati
 
 J'ai préféré utiliser Zustand a Redux + RxJs, pour éviter de complexifier la partie frontend.
 Zustand apporte une implémentation beaucoup plus simple et rapide que Redux, on gère tous comme un hooks.
+
+Pour toutes questions ou suggestions, n'hésitez pas à me contacter. 🦖
+
+
 ## License
 
 MIT

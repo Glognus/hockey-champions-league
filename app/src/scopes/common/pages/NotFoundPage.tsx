@@ -6,6 +6,7 @@ import { Gif } from "@giphy/react-components";
 import { useAsync } from "react-async-hook";
 import { IGif } from "@giphy/js-types";
 
+// For demo only
 const gf = new GiphyFetch("LppXzJsGPrCc9g5zqMncLr7p00uEu3mR");
 
 export const NotFoundPage = () => {

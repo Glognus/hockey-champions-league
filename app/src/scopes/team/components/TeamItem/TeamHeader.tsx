@@ -6,6 +6,7 @@ import { useGlobalStore } from "../../../../store/globalStore";
 import { IGif } from "@giphy/js-types";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 
+// For demo only
 const gf = new GiphyFetch("LppXzJsGPrCc9g5zqMncLr7p00uEu3mR");
 
 const CoachBox = () => {

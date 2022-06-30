@@ -1,6 +1,12 @@
 import { Avatar, Box, createTheme, Typography } from "@mui/material";
+import { useState } from "react";
+import { useAsync } from "react-async-hook";
 import shallow from "zustand/shallow";
 import { useGlobalStore } from "../../../../store/globalStore";
+import { IGif } from "@giphy/js-types";
+import { GiphyFetch } from "@giphy/js-fetch-api";
+
+const gf = new GiphyFetch("LppXzJsGPrCc9g5zqMncLr7p00uEu3mR");
 
 const CoachBox = () => {
   const { selectedTeamCoach } = useGlobalStore(
@@ -36,9 +42,19 @@ const CaptainBox = () => {
 
 export const TeamHeader = () => {
   const theme = createTheme();
+  const [gif, setGif] = useState<IGif | null>(null);
+  useAsync(async () => {
+    const { data } = await gf.random({
+      tag: "hockey",
+      type: "stickers",
+      rating: "g",
+    });
+    setGif(data);
+  }, []);
+
   return (
     <>
-      <Avatar sx={{ width: 80, height: 80 }} />
+      <Avatar sx={{ width: 80, height: 80 }} src={gif?.images?.original?.url} />
       <Box
         style={{
           display: "flex",

@@ -16,7 +16,7 @@ import {
   SelectChangeEvent,
   Grid,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import shallow from "zustand/shallow";
 import { Player, PlayerPayload, PositionType } from "../../../../models";
 import { useGlobalStore } from "../../../../store/globalStore";
@@ -44,9 +44,6 @@ export const PlayerForm = ({ open, player, onClose }: PlayerFormProps) => {
     position: player?.position ?? PositionType.CENTER_DEFENSEMAN,
     number: player?.number ?? 0,
   });
-  useEffect(() => {
-    return () => {};
-  }, []);
 
   const handleClose = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>

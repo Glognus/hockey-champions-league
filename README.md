@@ -25,6 +25,8 @@ Vous pouvez gérer l'équipe de Hockey des Canadiens de Montréal.
 
 ### Développement local
 
+    Configurer une connection string pour se connecter a une base PostgreSQL dans (./api/_local.settings.json => local.settings.json)
+
 Pour démarrer l'application web + api + swagger :
 ```sh
 cd app

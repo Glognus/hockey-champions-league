@@ -4,7 +4,7 @@ using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using HockeyApi.Service;
+using HockeyApi.Services;
 using HockeyApi.Db;
 
 [assembly: FunctionsStartup(typeof(HockeyApi.Startup))]

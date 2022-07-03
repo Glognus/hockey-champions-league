@@ -2,7 +2,7 @@
 
 namespace HockeyApi.Models
 {
-    public partial class Team
+    public class Team
     {
         public Team()
         {

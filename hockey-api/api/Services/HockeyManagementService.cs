@@ -7,7 +7,7 @@ using HockeyApi.Models;
 using HockeyApi.Mappers;
 using System.Collections.Generic;
 
-namespace HockeyApi.Service
+namespace HockeyApi.Services
 {
     public class HockeyManagementService : IHockeyManagementService
     {
@@ -66,7 +66,7 @@ namespace HockeyApi.Service
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<Team>> GetTeamsAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Team>> GetTeamsAsync(CancellationToken cancellationToken = default)
         {
             return await _context.Teams.ToListAsync(cancellationToken);
         }

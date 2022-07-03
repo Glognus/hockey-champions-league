@@ -1,6 +1,6 @@
 ﻿namespace HockeyApi.Models
 {
-    public partial class PlayerPayload
+    public class PlayerPayload
     {
         public int? Number { get; set; }
         public string Name { get; set; }

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace HockeyApi.Models
 {
-    public partial class Player
+    public class Player
     {
         public Player()
         {

@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using HockeyApi.Models;
 
-namespace HockeyApi.Service
+namespace HockeyApi.Services
 {
     public interface IHockeyManagementService
     {

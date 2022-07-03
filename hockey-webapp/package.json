@@ -1,5 +1,5 @@
 {
-  "name": "hockey-app",
+  "name": "hockey-webapp",
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-swa": "swa start http://localhost:3000 --api-location ./../api",
+    "start-swa": "swa start http://localhost:3000 --api-location ./../hockey-api/api",
     "start-dev": "concurrently \"yarn:start\" \"yarn:start-swa\" ",
     "build": "CI=false && react-scripts build",
     "test": "react-scripts test",

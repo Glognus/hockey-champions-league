@@ -10,11 +10,11 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Microsoft.OpenApi.Models;
 using HockeyApi.Models;
-using HockeyApi.Service;
+using HockeyApi.Services;
 using System.Web.Http;
 using System.Collections.Generic;
 
-namespace HockeyApi.Function
+namespace HockeyApi.Functions
 {
     public class HockeyApiFunctions
     {
